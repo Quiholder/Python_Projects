@@ -4,17 +4,13 @@ import sqlite3
 #create table in database if it does not exist 
 conn=sqlite3.connect('test.db')
 with conn:
-    cur= conn.cursor()
-    cur.execute('CREATE TABLE IF NOT EXISTS tbl_persons( \
-     ID INTERGER PRIMARY KEY AUTOINCREMENT, \
-     col.fname TEXT, \
-     col.lname TEXT, \
-     col.email TEXT \
-     )')
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS tbl_persons(ID INTEGER PRIMARY KEY AUTOINCREMENT, col.fname TEXT,col.lname TEXT, col.email TEXT)")
     conn.commit()
 conn.close()
 
 conn=sqlite3.connect('test.db')
+
 
 #insert data into the table 
 with conn:
@@ -27,5 +23,12 @@ with conn:
                 ('ashley','williams','ash@gmail.com'))
     cur.execute('INSERT INTO tbl_persons (col_fname, col_lname, col_email) VALUES (?,?,?)',\
                 ('anthony','blue','blueant@gmail.com'))
-    conn.commit()
-conn.close()        
+    conn.commit()     
+
+fileList= ('information.docx', 'Hello.txt', 'myImage.png', 'myMovie.mpg', 'World.txt', 'data.pdf','myPhoto.jpg')
+for x in persons_tuple:
+    if xendswith('txt'):
+        with conn:
+            cur=conn.cursor()
+            cur.exexute("INSERT INTO tbl_persons (col_fname) VALUES(?)", (x,))
+            print(x)
