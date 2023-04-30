@@ -80,16 +80,18 @@ class ParentWindow (Frame):
         source_files = os.listdir(source)
         #runs through each file in the source directory
         for i in source_files:
-            #moves each file from the source to the destination
+            #path
+            path=os.path.join(source, i)
+            modification_time = os.path.getmtime(path)
+            #moves eachnfile from the source to the destination
             shutil.move(source + '/' + i, destination)
-            print(i + 'was successfully transferred.')
-        #using for current time
+            print(i + 'was successfully transformed.')
+            
         ini_time_for_now = datetime.now()
         #print initial date and time
         print ("initial_date", str(ini_time_for_now))
 
-        #path
-        path = '/User/Desktop/text1.txt'
+    
         #get the time of last
         #modification of the specified
         #path since the epoch
