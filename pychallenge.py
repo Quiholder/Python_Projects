@@ -6,6 +6,7 @@ import shutil
 import datetime
 from datetime import datetime, timedelta
 import time
+import glob
 
 class ParentWindow (Frame):
     def __init__ (self, master):
@@ -83,24 +84,22 @@ class ParentWindow (Frame):
             #path
             path=os.path.join(source, i)
             modification_time = os.path.getmtime(path)
-            #moves eachnfile from the source to the destination
+            ini_time_for_now = datetime.now()
+            #print initial date and time
+            print ("initial_date", str(ini_time_for_now))
+            #get the time of last
+            #modification of the specified
+            #path since the epoch
+            modification_time = os.path.getmtime(path)
+            print("Last modification time since the epoch:", access_time)
+            local_time = time.ctime(modification_time)
+            print("Last modification time(Local time):",local_time)
+            #moves each file from the source to the destination
             shutil.move(source + '/' + i, destination)
             print(i + 'was successfully transformed.')
             
-        ini_time_for_now = datetime.now()
-        #print initial date and time
-        print ("initial_date", str(ini_time_for_now))
+            
 
-    
-        #get the time of last
-        #modification of the specified
-        #path since the epoch
-        modification_time = os.path.getmtime(path)
-        print("Last modification time since the epoch:", access_time)
-        local_time = time.ctime(modification_time)
-        print("Last modification time(Local time):",local_time)
-
-                
 
         
     #creates function to exit program
