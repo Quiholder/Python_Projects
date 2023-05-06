@@ -82,22 +82,23 @@ class ParentWindow (Frame):
         #runs through each file in the source directory
         for i in source_files:
             #path
-            path=os.path.join(source, i)
-            modification_time = os.path.getmtime(path)
-            ini_time_for_now = datetime.now()
+            mypath=os.path.join(source, i)
+            modification_time = os.path.getmtime(mypath)
+            ini_time_for_now = datetime.now() - timedelta(hours = 24)
             #print initial date and time
             print ("initial_date", str(ini_time_for_now))
             #get the time of last
             #modification of the specified
             #path since the epoch
-            modification_time = os.path.getmtime(path)
-            print("Last modification time since the epoch:", access_time)
-            local_time = time.ctime(modification_time)
+            modification_time = os.path.getmtime(mypath)
+            local_time = datetime.fromtimestamp(modification_time)
             print("Last modification time(Local time):",local_time)
-            #moves each file from the source to the destination
-            shutil.move(source + '/' + i, destination)
-            print(i + 'was successfully transformed.')
-            
+
+            if local_time > ini_time_for_now:
+                #moves each file from the source to the destination
+                shutil.move(source + '/' + i, destination)
+                print(i + 'was successfully transformed.')
+                
             
 
 
