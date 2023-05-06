@@ -14,8 +14,9 @@ class ParentWindow(Frame):
         self.btn.grid (padx=(10,10) , pady=(10,10))
 
         self.submit = Entry (width=75)
-        self.submit = Button(text="Submit Custom Text", width=30,height=2, command=self.submit)
-        self.submit.grid (row=0, column=1, columnspan=2, padx=(10,10), pady= (15, 15))
+        self.submit.grid (row=1, column=0, columnspan=3, padx=(10,10), pady= (15, 15))
+        self.submit1 = Button(self.master, text="Submit Custom Text", width=30,height=2, command=self.customHTML)
+        self.submit1.grid (row=0, column=1, columnspan=2, padx=(10,10), pady= (15, 15))
     
     
         
@@ -30,7 +31,14 @@ class ParentWindow(Frame):
         htmlFile.close()
         webbrowser.open_new_tab("index.html")
 
-   
+    def customHTML(self):
+        htmlText = self.submit.get()
+        htmlFile = open("index.html", "w")
+        htmlContent = "<html>\n<body>\n<h1>" + htmlText + "</h1>\n</body>\n</html>"
+        htmlFile.write(htmlContent)
+        htmlFile.close()
+        webbrowser.open_new_tab("index.html")
+
    
 
 if __name__=="__main__":
