@@ -1,23 +1,29 @@
 from django.db import models
 
-
 # Create your models here.
-class UniversityClasses(models.Model):
-    title = models.CharField(max_length=60, default="", blank=True, null=False)
-    course_number = models.IntegerField(default='', blank= True, null=False)
-    instructor_name = models.CharField(max_length=60, default="", blank=True, null=False)
-    duration = models.FloatField(null=True, blank= True, default=None)
+class Account(models.Model):
+    first_name = models.Charfield(max_length=50)
+    last_name = models.Charfield(max_length=50)
+    initial_deposit = models.DecimalField(max_digits=15, decimal_places=2)
 
-# Create model manager
-object = models.Manager()
+    # Defines the model Manager for Accounts
+    Accounts = models.Manager()
 
-# Displays the object output values in the form of a string
-def __str__(self):
-    # Returns the input value of the title and instructor name
-    # field as a tuple to display in the browser instead of the default titles
-    display_course = '{0.title}: {0.instructor_name}'
-    return display_course.format(self)
+    # Allows references to a specific account be returned as the owner's name not the primary key
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+# Choices for a transaction
 
-# Removes added 's' that Django adds to the model name in the browser display
-class Meta:
-    verbose_name_plural = "University Classes"
+TransactionTypes = [('Deposit', 'Deposit'), ('Withdrawal', 'Withdrawal')]
+
+# Creates the Transaction Model
+class Transaction(models.Model):
+    date = models.DateField()
+    type = models.Charfield(max_length=10, choices=TransactionTypes)
+    amount = models.DecimalField(max_digits=15, decimal_places=2)
+    description = models.Charfield(max_length=100)
+    account = models.ForeignKey(Account, on_delete=models.CASCASDE)
+
+    # Defines the model Manager for Transactions
+    Transactions = models.Manager()
+
