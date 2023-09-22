@@ -1,5 +1,5 @@
 # Python_Projects
-These are basic projects writton in Python. It use various modules such as tkinter or sqlite3. 
+These are basic projects written in Python. It use various modules such as tkinter or sqlite3. 
 
 PROJECTS:
 - Phonebook 
